@@ -1,0 +1,6 @@
+/* filepath: c:\Users\Joan Marc\simple-static-site\.dockerignore */
+node_modules
+npm-debug.log
+.git
+.github
+.env

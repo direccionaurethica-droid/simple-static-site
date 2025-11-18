@@ -1,0 +1,23 @@
+Muy sencillo — pasos mínimos para lanzar el sitio localmente:
+
+Opción A (doble clic):
+- Haz doble clic en "run-server.bat" en la carpeta del proyecto. El script intenta usar Node (server.js) y si no encuentra Node usa Python para servir la carpeta src.
+
+Opción A (doble clic - recomendado):
+- Haz doble clic en `run-attached.bat` para servir la carpeta `simple-static-website\src` en http://localhost:8080. El script intentará usar Node (npx http-server) y si no está instalado usará Python.
+
+Opción B (PowerShell):
+- Abre PowerShell, ve a la carpeta del proyecto y ejecuta:
+  .\start-server.ps1
+  # o para puerto específico:
+  .\start-server.ps1 -Port 8081
+
+Acciones auxiliares (creadas):
+- `run-attached.bat` — sirve `simple-static-website\src` y abre el navegador automáticamente.
+- `create-and-push.bat` — inicializa git local y, si tienes gh autenticado, crea el repo remoto y empuja.
+- `make-zip.bat` — crea `simple-static-site.zip` en la raíz del proyecto.
+
+Notas:
+- Si no tienes Node instalado, instala Node.js o usa Python (que viene en algunas instalaciones). El script te avisará si falta.
+- Si el navegador muestra "conexión rechazada", detén procesos node/python y vuelve a ejecutar (ver instrucciones en README o pide ayuda aquí).
+

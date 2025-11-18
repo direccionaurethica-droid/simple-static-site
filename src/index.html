@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sitio estático - Simple</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Mi Sitio Estático</h1>
+      <nav>
+        <a href="#home">Inicio</a>
+        <a href="#features">Características</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section id="home" class="hero">
+      <h2>Bienvenido</h2>
+      <p>Proyecto simple listo para servir localmente. Edita los archivos en src/ y recarga el navegador.</p>
+      <div class="actions">
+        <button id="themeToggle">Cambiar tema</button>
+        <button id="showInfo">Mostrar info</button>
+      </div>
+    </section>
+    <section id="features" class="grid">
+      <article class="card"><h3>Rápido</h3><p>HTML + CSS + JS sin dependencias.</p></article>
+      <article class="card"><h3>Fácil de editar</h3><p>Archivos claros y organizados en src/.</p></article>
+      <article class="card"><h3>Servir local</h3><p>Comandos simples para vista previa en Windows.</p></article>
+    </section>
+    <section id="contact"><h3>Contacto</h3><p>Abre <code>src/index.html</code> y personaliza.</p></section>
+  </main>
+  <footer class="site-footer"><div class="container"><small>&copy; 2025 - Simple Static Site</small><span id="status"></span></div></footer>
+  <script src="./js/main.js" defer></script>
+</body>
+</html>

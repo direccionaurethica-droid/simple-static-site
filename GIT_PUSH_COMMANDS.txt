@@ -1,0 +1,14 @@
+Comandos Git (si prefieres ejecutar manualmente)
+
+cd "C:\Users\Joan Marc\simple-static-site"
+git init
+git add -A
+git commit -m "Initial commit - simple-static-site"
+
+# Crear repo en GitHub vía web y luego enlazar (reemplaza USERNAME/REPO):
+git remote add origin https://github.com/USERNAME/REPO.git
+git branch -M main
+git push -u origin main
+
+# Opción con gh (si está autenticado):
+gh repo create --public --source=. --remote=origin --push

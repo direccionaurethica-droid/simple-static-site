@@ -1,0 +1,59 @@
+RUTA: C:\Users\Joan Marc\simple-static-site
+---- Contenido carpeta ----
+
+    Directory: C:\Users\Joan Marc\simple-static-site
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          18/11/2025    23:46                .github
+d----          18/11/2025    23:40                simple-static-website
+d----          18/11/2025    23:40                simple-static-website-1
+d----          18/11/2025    23:38                src
+-a---          18/11/2025    23:52            154 .autodeploy_state.json
+-a---          18/11/2025    23:46            114 .dockerignore
+-a---          18/11/2025    23:43             44 .gitignore
+-a---          19/11/2025     0:00             74 autodeploy_output.txt
+-a---          18/11/2025    23:52            145 Dockerfile
+-a---          18/11/2025    23:52            169 package.json
+-a---          18/11/2025    23:46            990 README.md
+-a---          18/11/2025    23:52            343 server.js
+
+---- estado autodeploy_state.json ----
+NO hay .autodeploy_state.json
+---- contenido src ----
+
+    Directory: C:\Users\Joan Marc\simple-static-site\src
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          18/11/2025    23:38                assets
+d----          18/11/2025    23:38                css
+d----          18/11/2025    23:38                js
+-a---          18/11/2025    23:52           1568 index.html
+
+    Directory: C:\Users\Joan Marc\simple-static-site\src\assets
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          18/11/2025    23:38             38 data
+-a---          18/11/2025    23:38             62 fonts
+
+    Directory: C:\Users\Joan Marc\simple-static-site\src\css
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          18/11/2025    23:52           1227 styles.css
+
+    Directory: C:\Users\Joan Marc\simple-static-site\src\js
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          18/11/2025    23:52            844 main.js
+
+---- node / npm ----
+node_modules NO existe
+---- servidor local ----
+No responde en http://localhost:8080 (o tiempo de espera)
+---- procesos node ----
+---- git / gh ----
+gh CLI no instalado
