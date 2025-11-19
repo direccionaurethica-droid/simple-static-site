@@ -75,7 +75,36 @@ export const pages = {
                 <h2>¡Hola! Soy Gigi</h2>
                 <p class="intro-text">Tu asistente personal de belleza. Voy a ayudarte a descubrir tu estilo único.</p>
                 <p class="intro-text">Primero, necesito conocerte un poco mejor con una rápida calibración.</p>
-                <button onclick="router.navigate('test')" class="btn-primary">Comenzar Calibración</button>
+                <button onclick="router.navigate('gigiCalibration')" class="btn-primary">Comenzar Calibración</button>
+            </div>
+        </div>
+    `,
+
+    gigiCalibration: (router) => `
+        <div class="page-container calibration-page">
+            <header class="page-header-dark">
+                <div class="calibration-header">
+                    <div class="gigi-logo-container">
+                        <img src="assets/d6b411d972cd0bf19ef7521b7b038f43509e5335.png" alt="Gigi" class="gigi-logo">
+                    </div>
+                    <h2 class="calibration-title">Calibración de Gigi</h2>
+                    <p class="calibration-subtitle">Ayúdame a conocerte mejor para personalizar tu experiencia</p>
+                </div>
+            </header>
+            <div class="calibration-container">
+                <div class="calibration-progress">
+                    <span class="progress-text" id="calibrationProgress">1 de 5</span>
+                    <div class="progress-dots" id="progressDots">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <div id="calibrationContainer">
+                    <!-- Questions loaded dynamically -->
+                </div>
             </div>
         </div>
     `,
