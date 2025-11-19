@@ -17,87 +17,98 @@ Object.keys(pages).forEach(path => {
     });
 });
 
-// Preguntas del test - 3 secciones
+// Preguntas del test - Original design from Figma
 const testQuestions = [
-    // SECCIÓN 1: Estilo Personal
     {
-        section: "Estilo Personal",
-        question: "¿Qué estilo te describe mejor?",
-        options: ["Clásico y elegante", "Moderno y atrevido", "Natural y relajado", "Versátil y adaptable"]
+        id: 1,
+        question: "¿Usas tu cabello como un complemento más y lo ves una forma de expresión?",
+        options: [
+            "Sí, mi cabello es una forma de expresión para mí",
+            "No, lo cuido de forma práctica"
+        ]
     },
     {
-        section: "Estilo Personal",
-        question: "¿Con qué frecuencia cambias tu look?",
-        options: ["Rara vez", "Cada temporada", "Frecuentemente", "Constantemente"]
+        id: 2,
+        question: "¿Qué priorizas con tu cabello?",
+        conditionalOptions: {
+            condition: 1,
+            optionsA: [
+                "Mi identidad y estado de ánimo",
+                "Estilo y cuidado estético, sin carga emocional",
+                "Adecuación a cada ocasión"
+            ],
+            optionsB: [
+                "Comodidad y rapidez",
+                "Funcionalidad (que esté presentable)"
+            ]
+        },
+        options: [] // Will be filled dynamically based on Q1 answer
     },
     {
-        section: "Estilo Personal",
-        question: "¿Qué es más importante para ti en tu estilo?",
-        options: ["Practicidad", "Tendencias", "Expresión personal", "Comodidad"]
+        id: 3,
+        question: "¿Qué lugar ocupan los accesorios para el cabello en tu día a día?",
+        conditionalOptions: {
+            condition: 1,
+            optionsA: [
+                "Imprescindibles: siempre elevan el look",
+                "Clásica: horquillas, diademas o coleteros combinados",
+                "Básico: llevo siempre lo mismo"
+            ],
+            optionsB: [
+                "Importantes, pero sin robar protagonismo",
+                "Nada o casi nada"
+            ]
+        },
+        options: [] // Will be filled dynamically based on Q1 answer
     },
     {
-        section: "Estilo Personal",
-        question: "¿Cómo describirías tu personalidad?",
-        options: ["Reservada y sofisticada", "Audaz y extrovertida", "Tranquila y natural", "Dinámica y adaptable"]
+        id: 4,
+        question: "¿Estás satisfecha con el tiempo que dedicas a tu cabello?",
+        options: [
+            "Estoy satisfecha: tengo el tiempo que necesito",
+            "Quiero ser más práctica (menos tiempo)",
+            "Quiero dedicarme más tiempo"
+        ]
     },
     {
-        section: "Estilo Personal",
-        question: "¿Qué ambiente te representa mejor?",
-        options: ["Ciudad elegante", "Eventos nocturnos", "Naturaleza y aire libre", "Espacios creativos"]
-    },
-    
-    // SECCIÓN 2: Preferencias de Color y Estética
-    {
-        section: "Color y Estética",
-        question: "¿Qué colores prefieres en tu look?",
-        options: ["Neutros y naturales", "Vibrantes y llamativos", "Pasteles suaves", "Oscuros intensos"]
+        id: 5,
+        question: "¿Cuánto tiempo le dedicas actualmente a tu cabello cada día?",
+        options: [
+            "Menos de 5 min",
+            "5–15 min",
+            "15–30 min",
+            "Más de 30 min"
+        ]
     },
     {
-        section: "Color y Estética",
-        question: "¿Qué tonalidad te hace sentir mejor?",
-        options: ["Tonos cálidos (dorados, naranjas)", "Tonos fríos (plateados, azules)", "Tonos neutros (beige, gris)", "Me gustan todos por igual"]
+        id: 6,
+        question: "¿Cómo te sientes con tu gasto actual en cuidado capilar?",
+        options: [
+            "Gasto demasiado (mucho mantenimiento o tratamientos)",
+            "Pago justo por la calidad que recibo",
+            "Es económico para lo que me aporta"
+        ]
     },
     {
-        section: "Color y Estética",
-        question: "¿Prefieres un look...?",
-        options: ["Monocromático y minimalista", "Contrastes llamativos", "Armonioso y sutil", "Experimental y único"]
+        id: 7,
+        question: "¿Qué presupuesto gastas mensualmente en tu cabello?",
+        options: [
+            "Menos de 30 €",
+            "30–70 €",
+            "70–150 €",
+            "Más de 150 €"
+        ]
     },
     {
-        section: "Color y Estética",
-        question: "¿Qué tipo de acabado prefieres?",
-        options: ["Mate y natural", "Brillante y luminoso", "Satinado y suave", "Depende del momento"]
-    },
-    {
-        section: "Color y Estética",
-        question: "¿Cómo te gusta llevar el cabello?",
-        options: ["Siempre perfecto y estructurado", "Con volumen y movimiento", "Natural y suelto", "Varía según mi estado de ánimo"]
-    },
-    
-    // SECCIÓN 3: Rutina y Cuidados
-    {
-        section: "Rutina y Cuidados",
-        question: "¿Cuánto tiempo dedicas a tu rutina de belleza?",
-        options: ["Menos de 15 min", "15-30 min", "30-60 min", "Más de 1 hora"]
-    },
-    {
-        section: "Rutina y Cuidados",
-        question: "¿Con qué frecuencia visitas el salón?",
-        options: ["Cada mes o menos", "Cada 2-3 meses", "Cada 4-6 meses", "Solo en ocasiones especiales"]
-    },
-    {
-        section: "Rutina y Cuidados",
-        question: "¿Qué tipo de productos prefieres?",
-        options: ["Profesionales de alta gama", "Naturales y orgánicos", "Efectivos y asequibles", "Los que estén de moda"]
-    },
-    {
-        section: "Rutina y Cuidados",
-        question: "¿Qué servicio te interesa más?",
-        options: ["Corte y peinado", "Color y mechas", "Tratamientos de cuidado", "Todo por igual"]
-    },
-    {
-        section: "Rutina y Cuidados",
-        question: "¿Qué buscas en un cambio de look?",
-        options: ["Renovar mi imagen", "Seguir tendencias", "Cuidar mi cabello", "Expresar mi personalidad"]
+        id: 8,
+        question: "Si tu cabello quedara perfecto siempre… ¿aumentarías tu gasto mensual?",
+        options: [
+            "No, mantendría mi gasto actual",
+            "Sí, hasta un 25% más",
+            "Sí, hasta el doble",
+            "Sí, incluso más del doble",
+            "Sí, si fueran servicios o productos clave que duran"
+        ]
     }
 ];
 
@@ -163,14 +174,24 @@ function showQuestion() {
     
     document.getElementById('progressBar').style.width = `${progress}%`;
     
+    // Get options (handle conditional options based on Q1)
+    let options = question.options;
+    if (question.conditionalOptions && testAnswers.length > 0) {
+        const firstAnswer = testAnswers[0].answer;
+        if (firstAnswer === "Sí, mi cabello es una forma de expresión para mí") {
+            options = question.conditionalOptions.optionsA;
+        } else if (firstAnswer === "No, lo cuido de forma práctica") {
+            options = question.conditionalOptions.optionsB;
+        }
+    }
+    
     container.innerHTML = `
         <div class="question-card">
-            <div class="question-section">${question.section}</div>
             <h2>Pregunta ${currentQuestion + 1} de ${testQuestions.length}</h2>
             <h3 class="question-text">${question.question}</h3>
             <div class="options">
-                ${question.options.map((option, i) => `
-                    <button class="option-btn" onclick="selectAnswer(${i}, '${option}')">
+                ${options.map((option, i) => `
+                    <button class="option-btn" onclick="selectAnswer(${i}, '${option.replace(/'/g, "\\'")}')">
                         ${option}
                     </button>
                 `).join('')}
