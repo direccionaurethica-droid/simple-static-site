@@ -246,11 +246,154 @@ export const pages = {
             </div>
         </div>
     `,
+
+    'salon-register': (router) => `
+        <div class="page-container">
+            <header class="page-header">
+                <button onclick="router.navigate('pro-access')" class="btn-back">← Volver</button>
+                <h1>AURETHICA</h1>
+            </header>
+            <div class="form-container">
+                <h2>Registro Salón / Autónomo</h2>
+                <form id="salonRegisterForm" class="auth-form">
+                    <h3 class="form-section">Datos del Negocio</h3>
+                    <input type="text" name="businessName" placeholder="Nombre del Salón/Negocio" required>
+                    <input type="text" name="cif" placeholder="CIF/NIF" required>
+                    <input type="text" name="address" placeholder="Dirección" required>
+                    <input type="text" name="city" placeholder="Ciudad" required>
+                    <input type="text" name="postalCode" placeholder="Código Postal" required>
+                    
+                    <h3 class="form-section">Datos del Responsable</h3>
+                    <input type="text" name="contactName" placeholder="Nombre del Responsable" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" placeholder="Teléfono" required>
+                    
+                    <h3 class="form-section">Credenciales</h3>
+                    <input type="password" name="password" placeholder="Contraseña" required>
+                    <input type="password" name="confirmPassword" placeholder="Confirmar Contraseña" required>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms" required>
+                        Acepto los términos y condiciones
+                    </label>
+                    
+                    <button type="submit" class="btn-primary">Registrar Salón</button>
+                </form>
+                <p class="form-footer">¿Ya tienes cuenta? <a href="#" onclick="router.navigate('login')">Inicia sesión</a></p>
+            </div>
+        </div>
+    `,
+
+    'stylist-register': (router) => `
+        <div class="page-container">
+            <header class="page-header">
+                <button onclick="router.navigate('pro-access')" class="btn-back">← Volver</button>
+                <h1>AURETHICA</h1>
+            </header>
+            <div class="form-container">
+                <h2>Registro Estilista</h2>
+                <form id="stylistRegisterForm" class="auth-form">
+                    <h3 class="form-section">Datos Personales</h3>
+                    <input type="text" name="firstName" placeholder="Nombre" required>
+                    <input type="text" name="lastName" placeholder="Apellidos" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" placeholder="Teléfono" required>
+                    
+                    <h3 class="form-section">Información Profesional</h3>
+                    <input type="text" name="salonCode" placeholder="Código del Salón (proporcionado por tu salón)" required>
+                    <input type="text" name="license" placeholder="Número de Licencia/Certificación" required>
+                    <select name="experience" required>
+                        <option value="">Años de experiencia</option>
+                        <option value="0-2">0-2 años</option>
+                        <option value="3-5">3-5 años</option>
+                        <option value="6-10">6-10 años</option>
+                        <option value="10+">Más de 10 años</option>
+                    </select>
+                    
+                    <h3 class="form-section">Especialidades</h3>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="specialtyColor" value="color">
+                        Color y Mechas
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="specialtyCut" value="cut">
+                        Corte y Peinado
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="specialtyTreatment" value="treatment">
+                        Tratamientos Capilares
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="specialtyExtensions" value="extensions">
+                        Extensiones
+                    </label>
+                    
+                    <h3 class="form-section">Credenciales</h3>
+                    <input type="password" name="password" placeholder="Contraseña" required>
+                    <input type="password" name="confirmPassword" placeholder="Confirmar Contraseña" required>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms" required>
+                        Acepto los términos y condiciones
+                    </label>
+                    
+                    <button type="submit" class="btn-primary">Registrarme como Estilista</button>
+                </form>
+                <p class="form-footer">¿Ya tienes cuenta? <a href="#" onclick="router.navigate('login')">Inicia sesión</a></p>
+            </div>
+        </div>
+    `,
+
+    'pro-dashboard': (router) => `
+        <div class="app-mode pro-dashboard">
+            <header class="app-header">
+                <div class="logo-small">AURETHICA PRO</div>
+                <nav class="app-nav">
+                    <a href="#" onclick="showProSection('clients')" class="nav-item active">Clientes</a>
+                    <a href="#" onclick="showProSection('calendar')" class="nav-item">Agenda</a>
+                    <a href="#" onclick="showProSection('stats')" class="nav-item">Estadísticas</a>
+                    <a href="#" onclick="showProSection('profile')" class="nav-item">Perfil</a>
+                </nav>
+            </header>
+            <main class="app-main pro-main">
+                <div id="clientsSection" class="app-section pro-section active">
+                    <h2>Gestión de Clientes</h2>
+                    <div class="clients-grid">
+                        <div class="client-card">
+                            <p>No tienes clientes aún</p>
+                            <button class="btn-primary">Añadir Cliente</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="calendarSection" class="app-section pro-section">
+                    <h2>Agenda</h2>
+                    <p>Gestiona tus citas y horarios</p>
+                </div>
+                <div id="statsSection" class="app-section pro-section">
+                    <h2>Estadísticas</h2>
+                    <p>Visualiza el rendimiento de tu negocio</p>
+                </div>
+                <div id="profileSection" class="app-section pro-section">
+                    <h2>Perfil Profesional</h2>
+                    <p>Edita tu información y preferencias</p>
+                </div>
+            </main>
+        </div>
+    `,
 };
 
 // Función global para cambiar secciones en App Mode
 window.showAppSection = function(section) {
     document.querySelectorAll('.app-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    
+    document.getElementById(`${section}Section`).classList.add('active');
+    event.target.classList.add('active');
+};
+
+// Función global para cambiar secciones en Pro Dashboard
+window.showProSection = function(section) {
+    document.querySelectorAll('.pro-section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     
     document.getElementById(`${section}Section`).classList.add('active');

@@ -1091,6 +1091,116 @@ html {
     font-size: 1.5rem;
 }
 
+/* Professional Forms */
+.form-section {
+    font-family: var(--font-display);
+    color: var(--color-secondary);
+    font-size: 1.2rem;
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+    padding-top: var(--spacing-md);
+    border-top: 2px solid var(--color-light);
+}
+
+.form-section:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.checkbox-label:hover {
+    background: var(--color-light);
+    border-radius: var(--radius-sm);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.auth-form select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    background: white;
+    cursor: pointer;
+}
+
+.auth-form select:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+}
+
+/* Pro Dashboard */
+.pro-dashboard {
+    background: var(--color-light);
+}
+
+.pro-dashboard .app-header {
+    background: var(--color-primary);
+    color: white;
+}
+
+.pro-dashboard .logo-small {
+    color: var(--color-secondary);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.pro-main {
+    padding: var(--spacing-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.pro-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.pro-section.active {
+    display: block;
+}
+
+.pro-section h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.client-card {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.client-card p {
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+}
+
 /* Responsive adicional */
 @media (max-width: 768px) {
     .hero-buttons {
