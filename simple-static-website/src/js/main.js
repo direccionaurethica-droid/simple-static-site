@@ -17,27 +17,87 @@ Object.keys(pages).forEach(path => {
     });
 });
 
-// Preguntas del test
+// Preguntas del test - 3 secciones
 const testQuestions = [
+    // SECCIÓN 1: Estilo Personal
     {
+        section: "Estilo Personal",
         question: "¿Qué estilo te describe mejor?",
         options: ["Clásico y elegante", "Moderno y atrevido", "Natural y relajado", "Versátil y adaptable"]
     },
     {
+        section: "Estilo Personal",
         question: "¿Con qué frecuencia cambias tu look?",
         options: ["Rara vez", "Cada temporada", "Frecuentemente", "Constantemente"]
     },
     {
-        question: "¿Qué es más importante para ti?",
+        section: "Estilo Personal",
+        question: "¿Qué es más importante para ti en tu estilo?",
         options: ["Practicidad", "Tendencias", "Expresión personal", "Comodidad"]
     },
     {
-        question: "¿Cuánto tiempo dedicas a tu rutina?",
+        section: "Estilo Personal",
+        question: "¿Cómo describirías tu personalidad?",
+        options: ["Reservada y sofisticada", "Audaz y extrovertida", "Tranquila y natural", "Dinámica y adaptable"]
+    },
+    {
+        section: "Estilo Personal",
+        question: "¿Qué ambiente te representa mejor?",
+        options: ["Ciudad elegante", "Eventos nocturnos", "Naturaleza y aire libre", "Espacios creativos"]
+    },
+    
+    // SECCIÓN 2: Preferencias de Color y Estética
+    {
+        section: "Color y Estética",
+        question: "¿Qué colores prefieres en tu look?",
+        options: ["Neutros y naturales", "Vibrantes y llamativos", "Pasteles suaves", "Oscuros intensos"]
+    },
+    {
+        section: "Color y Estética",
+        question: "¿Qué tonalidad te hace sentir mejor?",
+        options: ["Tonos cálidos (dorados, naranjas)", "Tonos fríos (plateados, azules)", "Tonos neutros (beige, gris)", "Me gustan todos por igual"]
+    },
+    {
+        section: "Color y Estética",
+        question: "¿Prefieres un look...?",
+        options: ["Monocromático y minimalista", "Contrastes llamativos", "Armonioso y sutil", "Experimental y único"]
+    },
+    {
+        section: "Color y Estética",
+        question: "¿Qué tipo de acabado prefieres?",
+        options: ["Mate y natural", "Brillante y luminoso", "Satinado y suave", "Depende del momento"]
+    },
+    {
+        section: "Color y Estética",
+        question: "¿Cómo te gusta llevar el cabello?",
+        options: ["Siempre perfecto y estructurado", "Con volumen y movimiento", "Natural y suelto", "Varía según mi estado de ánimo"]
+    },
+    
+    // SECCIÓN 3: Rutina y Cuidados
+    {
+        section: "Rutina y Cuidados",
+        question: "¿Cuánto tiempo dedicas a tu rutina de belleza?",
         options: ["Menos de 15 min", "15-30 min", "30-60 min", "Más de 1 hora"]
     },
     {
-        question: "¿Qué colores prefieres?",
-        options: ["Neutros y naturales", "Vibrantes y llamativos", "Pasteles suaves", "Oscuros intensos"]
+        section: "Rutina y Cuidados",
+        question: "¿Con qué frecuencia visitas el salón?",
+        options: ["Cada mes o menos", "Cada 2-3 meses", "Cada 4-6 meses", "Solo en ocasiones especiales"]
+    },
+    {
+        section: "Rutina y Cuidados",
+        question: "¿Qué tipo de productos prefieres?",
+        options: ["Profesionales de alta gama", "Naturales y orgánicos", "Efectivos y asequibles", "Los que estén de moda"]
+    },
+    {
+        section: "Rutina y Cuidados",
+        question: "¿Qué servicio te interesa más?",
+        options: ["Corte y peinado", "Color y mechas", "Tratamientos de cuidado", "Todo por igual"]
+    },
+    {
+        section: "Rutina y Cuidados",
+        question: "¿Qué buscas en un cambio de look?",
+        options: ["Renovar mi imagen", "Seguir tendencias", "Cuidar mi cabello", "Expresar mi personalidad"]
     }
 ];
 
@@ -105,6 +165,7 @@ function showQuestion() {
     
     container.innerHTML = `
         <div class="question-card">
+            <div class="question-section">${question.section}</div>
             <h2>Pregunta ${currentQuestion + 1} de ${testQuestions.length}</h2>
             <h3 class="question-text">${question.question}</h3>
             <div class="options">
