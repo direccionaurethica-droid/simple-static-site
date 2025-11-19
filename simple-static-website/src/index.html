@@ -1,21 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Static Website</title>
+    <meta name="description" content="Aurethica - Una belleza que ilumina sin excluir. Descubre tu estilo único con nuestra plataforma de belleza personalizada.">
+    <title>Aurethica - Una belleza que ilumina sin excluir</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Simple Static Website</h1>
+    <!-- Header / Navigation -->
+    <header id="header">
+        <nav>
+            <div class="logo">AURETHICA</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Una belleza que ilumina sin excluir</h1>
+            <p class="tagline">Descubre tu estilo único con tecnología de vanguardia y asesoramiento personalizado</p>
+            <a href="#servicios" class="cta-button">Descubre tu perfil</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
     <main>
-        <p>This is a simple static website built with HTML, CSS, and JavaScript.</p>
+        <!-- Servicios Section -->
+        <section id="servicios">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Análisis Personalizado</h3>
+                    <p>Descubre tu perfil de belleza único mediante nuestro avanzado sistema de análisis.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Recomendaciones IA</h3>
+                    <p>Recibe sugerencias personalizadas basadas en tu estilo y preferencias.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Conexión Profesional</h3>
+                    <p>Conecta con los mejores estilistas y salones de tu zona.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nosotros Section -->
+        <section id="nosotros">
+            <h2>Sobre Nosotros</h2>
+            <div class="about-content">
+                <p>En Aurethica, creemos que cada persona tiene una belleza única que merece ser descubierta y celebrada. Nuestra plataforma combina tecnología de inteligencia artificial con la experiencia de profesionales de la belleza para ofrecerte una experiencia personalizada y transformadora.</p>
+                <p>Nuestro compromiso es crear una comunidad inclusiva donde todos puedan expresar su estilo auténtico y sentirse seguros en su propia piel.</p>
+            </div>
+        </section>
+
+        <!-- Contacto Section -->
+        <section id="contacto">
+            <h2>Contáctanos</h2>
+            <div class="contact-content">
+                <p>¿Tienes preguntas? Nos encantaría escucharte.</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Tu nombre" required>
+                    <input type="email" placeholder="Tu email" required>
+                    <textarea placeholder="Tu mensaje" rows="5" required></textarea>
+                    <button type="submit" class="cta-button">Enviar mensaje</button>
+                </form>
+            </div>
+        </section>
     </main>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2023 Simple Static Website</p>
+        <p>&copy; 2025 Aurethica. Una belleza que ilumina sin excluir.</p>
+        <p>Diseñado con pasión por el equipo Aurethica</p>
     </footer>
+
     <script src="js/main.js"></script>
 </body>
 </html>
