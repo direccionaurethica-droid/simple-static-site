@@ -125,6 +125,38 @@ export const pages = {
         </div>
     `,
 
+    'test-results': (router) => `
+        <div class="page-container test-results-page">
+            <header class="page-header">
+                <h1>AURETHICA</h1>
+            </header>
+            <div class="content-center results-content">
+                <div class="results-hero">
+                    <div class="gigi-message">
+                        <img src="assets/d6b411d972cd0bf19ef7521b7b038f43509e5335.png" alt="Gigi" class="gigi-avatar-small">
+                        <div class="message-bubble">
+                            <p id="gigiResultMessage">¡Increíble! He analizado tus respuestas...</p>
+                        </div>
+                    </div>
+                    <h2>Tu Perfil Capilar Único</h2>
+                </div>
+                
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Results loaded dynamically -->
+                </div>
+                
+                <div class="recommendations-section">
+                    <h3>Recomendaciones Personalizadas</h3>
+                    <div class="recommendations-cards" id="recommendationsCards">
+                        <!-- Recommendations loaded dynamically -->
+                    </div>
+                </div>
+                
+                <button onclick="router.navigate('avatar')" class="btn-primary">Continuar al Avatar</button>
+            </div>
+        </div>
+    `,
+
     avatar: (router) => `
         <div class="page-container avatar-page">
             <header class="page-header">
@@ -163,17 +195,17 @@ export const pages = {
                     <h2>Inspiración & Tendencias</h2>
                     <div class="blog-grid">
                         <article class="blog-card">
-                            <img src="assets/images/fed00b8fb99f1d60d734c20b6fc58a96b6148a96.png" alt="Tendencia">
+                            <img src="assets/fed00b8fb99f1d60d734c20b6fc58a96b6148a96.png" alt="Tendencia">
                             <h3>Colores de Temporada 2025</h3>
                             <p>Descubre los tonos que marcarán tendencia este año</p>
                         </article>
                         <article class="blog-card">
-                            <img src="assets/images/d6b411d972cd0bf19ef7521b7b038f43509e5335.png" alt="Estilo">
+                            <img src="assets/d6b411d972cd0bf19ef7521b7b038f43509e5335.png" alt="Estilo">
                             <h3>Cortes que Favorecen</h3>
                             <p>Encuentra el corte perfecto para tu rostro</p>
                         </article>
                         <article class="blog-card">
-                            <img src="assets/images/8cb24d5ac69c65fe97935e0493f7d27cd4fea4f9.png" alt="Cuidado">
+                            <img src="assets/8cb24d5ac69c65fe97935e0493f7d27cd4fea4f9.png" alt="Cuidado">
                             <h3>Rutinas de Cuidado</h3>
                             <p>Tips profesionales para mantener tu cabello saludable</p>
                         </article>
@@ -347,37 +379,128 @@ export const pages = {
     'pro-dashboard': (router) => `
         <div class="app-mode pro-dashboard">
             <header class="app-header">
-                <div class="logo-small">AURETHICA PRO</div>
+                <div class="logo-small">
+                    <img src="assets/d6b411d972cd0bf19ef7521b7b038f43509e5335.png" alt="Aurethica" class="header-logo">
+                    AURETHICA PRO
+                </div>
                 <nav class="app-nav">
                     <a href="#" onclick="showProSection('clients')" class="nav-item active">Clientes</a>
                     <a href="#" onclick="showProSection('calendar')" class="nav-item">Agenda</a>
                     <a href="#" onclick="showProSection('stats')" class="nav-item">Estadísticas</a>
                     <a href="#" onclick="showProSection('profile')" class="nav-item">Perfil</a>
                 </nav>
+                <button onclick="router.navigate('landing')" class="btn-logout">Salir</button>
             </header>
             <main class="app-main pro-main">
                 <div id="clientsSection" class="app-section pro-section active">
-                    <h2>Gestión de Clientes</h2>
-                    <div class="clients-grid">
-                        <div class="client-card">
-                            <p>No tienes clientes aún</p>
-                            <button class="btn-primary">Añadir Cliente</button>
+                    <div class="section-header">
+                        <h2>Gestión de Clientes</h2>
+                        <button class="btn-primary" onclick="openAddClientModal()">+ Añadir Cliente</button>
+                    </div>
+                    <div class="clients-table" id="clientsTable">
+                        <!-- Clients loaded dynamically -->
+                    </div>
+                </div>
+                
+                <div id="calendarSection" class="app-section pro-section">
+                    <div class="section-header">
+                        <h2>Agenda</h2>
+                        <button class="btn-primary" onclick="openAddAppointmentModal()">+ Nueva Cita</button>
+                    </div>
+                    <div class="calendar-container">
+                        <div class="calendar-nav">
+                            <button onclick="changeMonth(-1)" class="btn-nav">←</button>
+                            <h3 id="currentMonth"></h3>
+                            <button onclick="changeMonth(1)" class="btn-nav">→</button>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid">
+                            <!-- Calendar loaded dynamically -->
+                        </div>
+                        <div class="appointments-list">
+                            <h4>Citas de Hoy</h4>
+                            <div id="todayAppointments">
+                                <!-- Today's appointments -->
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="calendarSection" class="app-section pro-section">
-                    <h2>Agenda</h2>
-                    <p>Gestiona tus citas y horarios</p>
-                </div>
+                
                 <div id="statsSection" class="app-section pro-section">
                     <h2>Estadísticas</h2>
-                    <p>Visualiza el rendimiento de tu negocio</p>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Clientes Totales</h3>
+                            <p class="stat-number" id="totalClients">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Citas Este Mes</h3>
+                            <p class="stat-number" id="monthAppointments">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Ingresos Mensuales</h3>
+                            <p class="stat-number" id="monthRevenue">0€</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Valoración Media</h3>
+                            <p class="stat-number" id="avgRating">⭐ 0.0</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Citas por Servicio</h3>
+                        <canvas id="servicesChart"></canvas>
+                    </div>
                 </div>
+                
                 <div id="profileSection" class="app-section pro-section">
                     <h2>Perfil Profesional</h2>
-                    <p>Edita tu información y preferencias</p>
+                    <div class="profile-editor" id="profileEditor">
+                        <!-- Profile form loaded dynamically -->
+                    </div>
                 </div>
             </main>
+            
+            <!-- Modal for adding client -->
+            <div id="addClientModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeAddClientModal()">&times;</span>
+                    <h3>Añadir Nuevo Cliente</h3>
+                    <form id="addClientForm" class="modal-form">
+                        <input type="text" name="name" placeholder="Nombre completo" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="tel" name="phone" placeholder="Teléfono" required>
+                        <textarea name="notes" placeholder="Notas (opcional)" rows="3"></textarea>
+                        <button type="submit" class="btn-primary">Guardar Cliente</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Modal for adding appointment -->
+            <div id="addAppointmentModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeAddAppointmentModal()">&times;</span>
+                    <h3>Nueva Cita</h3>
+                    <form id="addAppointmentForm" class="modal-form">
+                        <select name="clientId" required>
+                            <option value="">Seleccionar cliente</option>
+                            <!-- Clients loaded dynamically -->
+                        </select>
+                        <input type="date" name="date" required>
+                        <input type="time" name="time" required>
+                        <select name="service" required>
+                            <option value="">Tipo de servicio</option>
+                            <option value="corte">Corte</option>
+                            <option value="color">Color</option>
+                            <option value="mechas">Mechas</option>
+                            <option value="tratamiento">Tratamiento</option>
+                            <option value="peinado">Peinado</option>
+                        </select>
+                        <input type="number" name="duration" placeholder="Duración (minutos)" required>
+                        <input type="number" name="price" placeholder="Precio (€)" step="0.01">
+                        <textarea name="notes" placeholder="Notas" rows="2"></textarea>
+                        <button type="submit" class="btn-primary">Agendar Cita</button>
+                    </form>
+                </div>
+            </div>
         </div>
     `,
 };

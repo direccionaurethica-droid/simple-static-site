@@ -203,8 +203,14 @@ function initPageHandlers(page, userData) {
         case 'test':
             initTest();
             break;
+        case 'test-results':
+            initTestResults();
+            break;
         case 'avatar':
             initAvatarUpload();
+            break;
+        case 'pro-dashboard':
+            initProDashboard();
             break;
     }
 }
@@ -221,6 +227,9 @@ function initRegisterForm() {
             alert('Las contraseñas no coinciden');
             return;
         }
+        
+        // Guardar datos del usuario
+        sessionStorage.setItem('userData', JSON.stringify(userData));
         
         router.navigate('gigiIntro', userData);
     });
@@ -412,8 +421,12 @@ window.selectAnswer = function(index, answer) {
 };
 
 function finishTest() {
+    // Guardar respuestas del test
+    sessionStorage.setItem('testAnswers', JSON.stringify(testAnswers));
+    sessionStorage.setItem('testCompleted', 'true');
+    
     setTimeout(() => {
-        router.navigate('avatar');
+        router.navigate('test-results');
     }, 500);
 }
 
@@ -462,8 +475,389 @@ function initAvatarUpload() {
         });
         
         continueBtn.disabled = uploadedFiles.length === 0;
+        
+        // Guardar avatares en sessionStorage
+        if (uploadedFiles.length > 0) {
+            const avatarData = {
+                count: uploadedFiles.length,
+                files: uploadedFiles.map(f => f.name)
+            };
+            sessionStorage.setItem('avatars', JSON.stringify(avatarData));
+        }
     }
 }
+
+// Resultados del test
+function initTestResults() {
+    const testData = JSON.parse(sessionStorage.getItem('testAnswers') || '[]');
+    const calibration = JSON.parse(sessionStorage.getItem('gigiCalibration') || '{}');
+    const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
+    
+    // Analizar resultados
+    const analysis = analyzeTestResults(testData);
+    
+    // Mostrar mensaje de Gigi personalizado
+    const gigiMessage = document.getElementById('gigiResultMessage');
+    if (gigiMessage) {
+        gigiMessage.textContent = getGigiMessage(calibration, analysis);
+    }
+    
+    // Mostrar resultados
+    const resultsGrid = document.getElementById('resultsGrid');
+    if (resultsGrid) {
+        resultsGrid.innerHTML = `
+            <div class="result-card">
+                <h3>🎨 Tu Relación con el Cabello</h3>
+                <p class="result-value">${analysis.hairRelationship}</p>
+            </div>
+            <div class="result-card">
+                <h3>⏱️ Tiempo Dedicado</h3>
+                <p class="result-value">${analysis.timeCommitment}</p>
+            </div>
+            <div class="result-card">
+                <h3>💰 Inversión</h3>
+                <p class="result-value">${analysis.investment}</p>
+            </div>
+            <div class="result-card">
+                <h3>✨ Estilo Personal</h3>
+                <p class="result-value">${analysis.style}</p>
+            </div>
+        `;
+    }
+    
+    // Mostrar recomendaciones
+    const recommendationsCards = document.getElementById('recommendationsCards');
+    if (recommendationsCards) {
+        recommendationsCards.innerHTML = analysis.recommendations.map(rec => `
+            <div class="recommendation-card">
+                <h4>${rec.title}</h4>
+                <p>${rec.description}</p>
+            </div>
+        `).join('');
+    }
+    
+    // Guardar análisis completo
+    sessionStorage.setItem('testAnalysis', JSON.stringify(analysis));
+}
+
+function analyzeTestResults(answers) {
+    const firstAnswer = answers[0]?.answer || '';
+    const isExpressive = firstAnswer.includes('expresión');
+    
+    // Analizar respuestas
+    const analysis = {
+        hairRelationship: isExpressive ? 'Expresión Personal' : 'Cuidado Práctico',
+        timeCommitment: answers[4]?.answer || 'No especificado',
+        investment: answers[6]?.answer || 'No especificado',
+        style: isExpressive ? 'Versátil y creativo' : 'Funcional y eficiente',
+        recommendations: []
+    };
+    
+    // Generar recomendaciones basadas en las respuestas
+    if (isExpressive) {
+        analysis.recommendations.push(
+            { title: 'Experimenta con Color', description: 'Tu perfil sugiere que disfrutas probar nuevos tonos y estilos' },
+            { title: 'Accesorios Creativos', description: 'Los accesorios son clave en tu estilo personal' }
+        );
+    } else {
+        analysis.recommendations.push(
+            { title: 'Rutina Simplificada', description: 'Productos multifunción que ahorran tiempo' },
+            { title: 'Cortes de Bajo Mantenimiento', description: 'Estilos que se mantienen bien entre visitas al salón' }
+        );
+    }
+    
+    // Recomendaciones según tiempo dedicado
+    const timeAnswer = answers[4]?.answer || '';
+    if (timeAnswer.includes('Menos')) {
+        analysis.recommendations.push(
+            { title: 'Productos Express', description: 'Soluciones rápidas para tu rutina diaria' }
+        );
+    } else if (timeAnswer.includes('Más de 30')) {
+        analysis.recommendations.push(
+            { title: 'Tratamientos Premium', description: 'Tu dedicación merece productos profesionales' }
+        );
+    }
+    
+    return analysis;
+}
+
+function getGigiMessage(calibration, analysis) {
+    const tone = calibration.confirmacion || 'equilibrado';
+    
+    const messages = {
+        intimo: `¡Increíble! He analizado tus respuestas y veo algo hermoso: ${analysis.hairRelationship.toLowerCase()} es tu forma de expresarte. Estoy aquí para acompañarte en cada paso de este viaje. 💕`,
+        firme: `¡Perfecto! Tus respuestas son claras: ${analysis.hairRelationship} define tu estilo. Vamos a potenciar eso al máximo.`,
+        equilibrado: `¡Muy bien! He analizado tus respuestas y entiendo que tu cabello es ${analysis.hairRelationship.toLowerCase()}. Vamos a crear algo especial para ti.`,
+        suave: `Gracias por compartir. He visto que para ti el cabello es ${analysis.hairRelationship.toLowerCase()}. Vamos a encontrar lo que mejor te represente.`,
+        neutro: `He completado el análisis. Tu perfil indica ${analysis.hairRelationship}. Te mostraré las opciones más adecuadas.`
+    };
+    
+    return messages[tone] || messages.equilibrado;
+}
+
+// Dashboard Profesional
+function initProDashboard() {
+    const proUser = JSON.parse(sessionStorage.getItem('proUser') || '{}');
+    
+    // Inicializar clientes
+    if (!localStorage.getItem('clients')) {
+        localStorage.setItem('clients', JSON.stringify([]));
+    }
+    
+    // Inicializar citas
+    if (!localStorage.getItem('appointments')) {
+        localStorage.setItem('appointments', JSON.stringify([]));
+    }
+    
+    // Cargar clientes
+    loadClients();
+    
+    // Cargar calendario
+    loadCalendar();
+    
+    // Cargar estadísticas
+    loadStats();
+    
+    // Cargar perfil
+    loadProfile(proUser);
+}
+
+function loadClients() {
+    const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+    const table = document.getElementById('clientsTable');
+    
+    if (!table) return;
+    
+    if (clients.length === 0) {
+        table.innerHTML = `
+            <div class="empty-state">
+                <p>No tienes clientes aún</p>
+                <p class="hint">Haz clic en "+ Añadir Cliente" para comenzar</p>
+            </div>
+        `;
+        return;
+    }
+    
+    table.innerHTML = `
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Última Visita</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${clients.map(client => `
+                    <tr>
+                        <td>${client.name}</td>
+                        <td>${client.email}</td>
+                        <td>${client.phone}</td>
+                        <td>${client.lastVisit || 'Primera visita'}</td>
+                        <td>
+                            <button onclick="editClient('${client.id}')" class="btn-icon">✏️</button>
+                            <button onclick="deleteClient('${client.id}')" class="btn-icon">🗑️</button>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+}
+
+function loadCalendar() {
+    const now = new Date();
+    const currentMonth = document.getElementById('currentMonth');
+    if (currentMonth) {
+        currentMonth.textContent = now.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+    }
+    
+    const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    const today = now.toISOString().split('T')[0];
+    const todayAppointments = appointments.filter(apt => apt.date === today);
+    
+    const todayList = document.getElementById('todayAppointments');
+    if (todayList) {
+        if (todayAppointments.length === 0) {
+            todayList.innerHTML = '<p class="empty-state">No hay citas para hoy</p>';
+        } else {
+            todayList.innerHTML = todayAppointments.map(apt => `
+                <div class="appointment-item">
+                    <strong>${apt.time}</strong> - ${apt.clientName}<br>
+                    <span class="service-tag">${apt.service}</span>
+                </div>
+            `).join('');
+        }
+    }
+    
+    // Generar calendario
+    generateCalendarGrid(now);
+}
+
+function generateCalendarGrid(date) {
+    const grid = document.getElementById('calendarGrid');
+    if (!grid) return;
+    
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+    let html = '<div class="calendar-weekdays">';
+    ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'].forEach(day => {
+        html += `<div class="weekday">${day}</div>`;
+    });
+    html += '</div><div class="calendar-days">';
+    
+    // Días vacíos antes del primer día
+    for (let i = 0; i < firstDay; i++) {
+        html += '<div class="calendar-day empty"></div>';
+    }
+    
+    // Días del mes
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const isToday = dateStr === new Date().toISOString().split('T')[0];
+        html += `<div class="calendar-day ${isToday ? 'today' : ''}" data-date="${dateStr}">${day}</div>`;
+    }
+    
+    html += '</div>';
+    grid.innerHTML = html;
+}
+
+function loadStats() {
+    const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+    const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    
+    document.getElementById('totalClients').textContent = clients.length;
+    
+    const now = new Date();
+    const thisMonth = appointments.filter(apt => {
+        const aptDate = new Date(apt.date);
+        return aptDate.getMonth() === now.getMonth() && aptDate.getFullYear() === now.getFullYear();
+    });
+    
+    document.getElementById('monthAppointments').textContent = thisMonth.length;
+    
+    const revenue = thisMonth.reduce((sum, apt) => sum + (parseFloat(apt.price) || 0), 0);
+    document.getElementById('monthRevenue').textContent = `${revenue.toFixed(2)}€`;
+    
+    document.getElementById('avgRating').textContent = '⭐ 4.8';
+}
+
+function loadProfile(proUser) {
+    const profileEditor = document.getElementById('profileEditor');
+    if (!profileEditor) return;
+    
+    profileEditor.innerHTML = `
+        <form class="profile-form">
+            <h3>Información del Negocio</h3>
+            <input type="text" value="${proUser.businessName || proUser.firstName + ' ' + proUser.lastName || ''}" placeholder="Nombre">
+            <input type="email" value="${proUser.email || ''}" placeholder="Email">
+            <input type="tel" value="${proUser.phone || ''}" placeholder="Teléfono">
+            <textarea placeholder="Descripción" rows="4">${proUser.description || ''}</textarea>
+            <button type="submit" class="btn-primary">Guardar Cambios</button>
+        </form>
+    `;
+}
+
+// Funciones globales para modales y acciones
+window.openAddClientModal = function() {
+    document.getElementById('addClientModal').style.display = 'block';
+};
+
+window.closeAddClientModal = function() {
+    document.getElementById('addClientModal').style.display = 'none';
+};
+
+window.openAddAppointmentModal = function() {
+    // Cargar clientes en el select
+    const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+    const select = document.querySelector('#addAppointmentForm select[name="clientId"]');
+    if (select) {
+        select.innerHTML = '<option value="">Seleccionar cliente</option>' +
+            clients.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+    }
+    document.getElementById('addAppointmentModal').style.display = 'block';
+};
+
+window.closeAddAppointmentModal = function() {
+    document.getElementById('addAppointmentModal').style.display = 'none';
+};
+
+window.changeMonth = function(delta) {
+    // Implementar cambio de mes
+    console.log('Cambiar mes:', delta);
+};
+
+window.editClient = function(id) {
+    console.log('Editar cliente:', id);
+};
+
+window.deleteClient = function(id) {
+    if (confirm('¿Seguro que quieres eliminar este cliente?')) {
+        const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+        const updated = clients.filter(c => c.id !== id);
+        localStorage.setItem('clients', JSON.stringify(updated));
+        loadClients();
+    }
+};
+
+// Form handlers para modales
+document.addEventListener('submit', function(e) {
+    if (e.target.id === 'addClientForm') {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const newClient = {
+            id: Date.now().toString(),
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            notes: formData.get('notes'),
+            createdAt: new Date().toISOString()
+        };
+        
+        const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+        clients.push(newClient);
+        localStorage.setItem('clients', JSON.stringify(clients));
+        
+        closeAddClientModal();
+        loadClients();
+        loadStats();
+        e.target.reset();
+    }
+    
+    if (e.target.id === 'addAppointmentForm') {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+        const client = clients.find(c => c.id === formData.get('clientId'));
+        
+        const newAppointment = {
+            id: Date.now().toString(),
+            clientId: formData.get('clientId'),
+            clientName: client?.name || 'Cliente',
+            date: formData.get('date'),
+            time: formData.get('time'),
+            service: formData.get('service'),
+            duration: formData.get('duration'),
+            price: formData.get('price'),
+            notes: formData.get('notes'),
+            createdAt: new Date().toISOString()
+        };
+        
+        const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+        appointments.push(newAppointment);
+        localStorage.setItem('appointments', JSON.stringify(appointments));
+        
+        closeAddAppointmentModal();
+        loadCalendar();
+        loadStats();
+        e.target.reset();
+    }
+});
 
 // Inicializar aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {

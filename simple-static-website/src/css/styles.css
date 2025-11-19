@@ -1201,6 +1201,423 @@ html {
     margin-bottom: var(--spacing-md);
 }
 
+/* Test Results Page */
+.test-results-page {
+    background: var(--color-light);
+}
+
+.results-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.results-hero {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.gigi-message {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.gigi-avatar-small {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message-bubble {
+    flex: 1;
+    text-align: left;
+}
+
+.message-bubble p {
+    color: var(--color-primary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.results-hero h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.result-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.result-card h3 {
+    font-size: 1rem;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+}
+
+.result-value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    font-weight: 600;
+    margin: 0;
+}
+
+.recommendations-section {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.recommendations-section h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.recommendations-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.recommendation-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-secondary);
+    box-shadow: var(--shadow-sm);
+}
+
+.recommendation-card h4 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.recommendation-card p {
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    position: absolute;
+    right: var(--spacing-lg);
+    top: var(--spacing-lg);
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+.close:hover {
+    color: var(--color-primary);
+}
+
+.modal-form {
+    margin-top: var(--spacing-lg);
+}
+
+.modal-form input,
+.modal-form select,
+.modal-form textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid #e0e0e0;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
+}
+
+.modal-form input:focus,
+.modal-form select:focus,
+.modal-form textarea:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+}
+
+/* Calendar Styles */
+.calendar-container {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.calendar-nav h3 {
+    font-family: var(--font-display);
+    color: var(--color-primary);
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.btn-nav {
+    padding: 0.5rem 1rem;
+    background: var(--color-light);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.btn-nav:hover {
+    background: var(--color-secondary);
+    color: white;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.weekday {
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text);
+    padding: 0.5rem;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-day:hover {
+    background: var(--color-light);
+    border-color: var(--color-secondary);
+}
+
+.calendar-day.today {
+    background: var(--color-secondary);
+    color: white;
+    font-weight: 600;
+}
+
+.calendar-day.empty {
+    border: none;
+    cursor: default;
+}
+
+.appointments-list {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
+    border-top: 2px solid var(--color-light);
+}
+
+.appointments-list h4 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.appointment-item {
+    background: var(--color-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+.service-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--color-secondary);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Data Table */
+.data-table {
+    width: 100%;
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.data-table th,
+.data-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--color-light);
+}
+
+.data-table th {
+    background: var(--color-primary);
+    color: white;
+    font-weight: 600;
+}
+
+.data-table tr:hover {
+    background: var(--color-light);
+}
+
+.btn-icon {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.btn-icon:hover {
+    transform: scale(1.1);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--color-text);
+}
+
+.empty-state .hint {
+    font-size: 0.875rem;
+    color: #999;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-header h2 {
+    margin: 0;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.stat-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--color-secondary);
+    font-weight: 600;
+    margin: 0;
+}
+
+.chart-container {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.chart-container h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.header-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+/* Blog Images */
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+}
+
 /* Responsive adicional */
 @media (max-width: 768px) {
     .hero-buttons {
